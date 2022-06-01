@@ -6,11 +6,11 @@ export default function Header({title}) {
     return (
       <header>
         <div className='header_logo'>
-          <a href='#' alt={title}><img src={logo} alt={title}/></a>
+          <a href='/' alt={title}><img src={logo} alt={title}/></a>
         </div>
 
         <div className='header_name'>
-          <a href='#' alt={title} style={ {textDecoration: 'none', color: 'black'} }>{title}</a>
+          <a href='/' alt={title} style={ {textDecoration: 'none', color: 'black'} }>{title}</a>
         </div>
 
         <div className='header_search_cart'>
