@@ -1,5 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './Header';
+import Home from './Home';
 import { useFeaturedBanners } from './utils/hooks/useFeaturedBanners';
 
 function App() {
@@ -7,22 +8,17 @@ function App() {
   console.log(data, isLoading);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className='container'>
+      <Header title='Furniture Store' />
+
+      <section className='content'>
+        <Home />
+      </section>
+
+      <footer>
+        Ecommerce created during Wizeline's Academy React Bootcamp
+      </footer>
+    </section>
   );
 }
 
