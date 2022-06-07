@@ -1,19 +1,38 @@
+import styled from "styled-components";
 import items from "../mocks/en-us/product-categories.json";
+
+const CategoriesContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 10px;
+`;
+const Link = styled.a`
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 10px;
+`;
+
+const Img = styled.img`
+  width: 150px;
+  border-radius: 10px;
+`;
 
 export default function Categories() {
   const categories = items.results;
 
   return (
-    <div className='categories' style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', padding: '10px'}}>
+    <CategoriesContainer>
       {
-        categories.map(category =>
-          <a href={category.href} alt={category.data.alt} key={category.id}
-            style={ {textDecoration: 'none', color: 'black', display: 'flex', flexFlow: 'column', alignItems: 'center', padding: '10px'} }>
-            <img src={category.data.main_image.url} alt={category.data.main_image.alt} style={ {width: '150px',
-  borderRadius: '10px'} }/>
-            <span>{category.data.name}</span>
-          </a>)
+        categories.map(({href, data, id}) =>
+          <Link href={href} alt={data.alt} key={id}>
+            <Img src={data.main_image.url} alt={data.main_image.alt} />
+            <span>{data.name}</span>
+          </Link>)
       }
-    </div>
+    </CategoriesContainer>
   );
 }
