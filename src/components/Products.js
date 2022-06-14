@@ -8,8 +8,8 @@ const ProductsContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export default function Products() {
-  const products = items.results;
+export default function Products({filter}) {
+  const products = filter ? items.results.filter(filter) : items.results;
 
   return (
     <ProductsContainer>

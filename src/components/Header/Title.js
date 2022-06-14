@@ -11,11 +11,12 @@ const TitleContainer = styled.div`
 const TitleLink = styled.a`
   text-decoration: none;
   color: black;
+  cursor: pointer;
 `;
 
-const Title = ({title}) => (
+const Title = ({title, handleGoToPage}) => (
   <TitleContainer>
-    <TitleLink href='/' alt={title}>{title}</TitleLink>
+    <TitleLink alt={title} onClick={handleGoToPage} data-go-to-page="Home">{title}</TitleLink>
   </TitleContainer>
 );
 
