@@ -1,12 +1,19 @@
+import styled from "styled-components";
 import items from "../mocks/en-us/products.json";
 import Product from './Product.js';
 
-export default function Products() {
-  const products = items.results;
+const ProductsContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+`;
+
+export default function Products({filter}) {
+  const products = filter ? items.results.filter(filter) : items.results;
 
   return (
-    <div className="products" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
+    <ProductsContainer>
       { products.map(product => <Product product={product}  key={product.id} />) }
-    </div>
+    </ProductsContainer>
   );
 }

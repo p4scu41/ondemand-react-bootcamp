@@ -11,6 +11,7 @@ const SliderItem = styled.div`
   width: 100%;
   height: 400px;
   background-size: cover;
+  background-image: url(${props => props.image_url})
 `;
 
 const SliderTitle = styled.div`
@@ -29,9 +30,9 @@ export default function Slider() {
   return (
     <SliderContainer>
       {
-        banners.map(banner =>
-          <SliderItem key={banner.id} className='slider_item' style={ {backgroundImage: `url(${banner.data.main_image.url})`} }>
-            <SliderTitle href={banner.href} alt={banner.data.main_image.alt}>{banner.data.title}</SliderTitle>
+        banners.map(({id, data, href}) =>
+          <SliderItem key={id} image_url={data.main_image.url} >
+            <SliderTitle href={href} alt={data.main_image.alt}>{data.title}</SliderTitle>
           </SliderItem>)
       }
     </SliderContainer>
