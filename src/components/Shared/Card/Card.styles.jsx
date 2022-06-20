@@ -30,15 +30,4 @@ const CardFooter = styled.div`
   padding: 10px 0;
 `;
 
-const Card = ({image, title, category, price}) => (
-    <CardContainer>
-        <CardImg image_url={image}></CardImg>
-        <CardTitle>{title}</CardTitle>
-        <CardFooter>
-            <span>{category}</span>
-            <span>{price}</span>
-        </CardFooter>
-    </CardContainer>
-);
-
-export { Card, CardContainer, CardImg, CardTitle, CardFooter };
+export { CardContainer, CardImg, CardTitle, CardFooter };

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import items from "../mocks/en-us/products.json";
-import Product from './Product.js';
+import Product from './Product.component';
 
 const ProductsContainer = styled.div`
   display: flex;

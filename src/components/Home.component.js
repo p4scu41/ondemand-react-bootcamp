@@ -1,7 +1,7 @@
-import Button from "./Button";
-import Categories from "./Categories";
-import Products from "./Products";
-import Slider from "./Slider";
+import Categories from "./Categories/Categories.component";
+import Products from "./Products.component";
+import Button from "./Shared/Button.component";
+import Slider from "./Slider/Slider.component";
 
 export default function Home({handleGoToPage}) {
   return (

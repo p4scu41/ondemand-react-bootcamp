@@ -1,20 +1,10 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-import loadingImg from '../img/loading.gif';
-import items from "../mocks/en-us/products.json";
-import Categories from "./Categories";
-import Pagination from "./Pagination";
-import Product from './Product.js';
-
-const Container = styled.div`
-  display: flex;
-`;
-
-const ProductsContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-`;
+import loadingImg from '../../img/loading.gif';
+import items from "../../mocks/en-us/products.json";
+import Categories from "../Categories/Categories.component";
+import Pagination from "../Pagination/Pagination.component";
+import Product from '../Product.component';
+import { Container, FlexCenter, ImgLoading, ProductsContainer, Wrapper } from './ProductList.styles';
 
 function ProductList() {
   const [isLoading, setIsLoading] = useState(true);
@@ -47,18 +37,18 @@ function ProductList() {
   return (
     <Container>
       <Categories show_title={true} show_image={false} handleClick={handleSelectCategory} selectedIds={categoriesSelected}/>
-      <div style={{flex: 'auto'}}>
+      <Wrapper>
         <ProductsContainer>
           {
             !isLoading && products.map(product => <Product product={product} key={product.id} />)
           }
         </ProductsContainer>
-        <div style={{display: 'flex', justifyContent: 'center'}}>
+        <FlexCenter>
           { !isLoading && products.length > 0 && <Pagination /> }
           { !isLoading && products.length === 0 && 'Products not found in the selected categories.' }
-          { isLoading && <img alt="loading..." src={loadingImg} style={{width: '60px'}}/> }
-        </div>
-      </div>
+          { isLoading && <ImgLoading alt="loading..." src={loadingImg} /> }
+        </FlexCenter>
+      </Wrapper>
     </Container>
   )
 }

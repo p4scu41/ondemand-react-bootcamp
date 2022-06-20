@@ -1,20 +1,16 @@
 import logo from '../../img/logo.png';
-import CartIcon from './CartIcon';
-import ImgRounded from "./ImgRounded";
-import SearchCartContainer from "./SearchCartContainer";
-import SearchIcon from './SearchIcon';
-import SearchInput from "./SearchInput";
-import StyledHeader from "./StyledHeader";
-import Title from "./Title";
+import { CartIcon, ImgRounded, LogoContainer, StyledHeader } from './Header.styles';
+import { SearchCartContainer, SearchIcon, SearchInput } from "./Search.styles";
+import Title from "./Title.component";
 
 export default function Header({title, handleGoToPage}) {
     return (
       <StyledHeader>
-        <div style={{padding: '1rem'}}>
+        <LogoContainer>
           <a href='/' alt={title}>
             <ImgRounded src={logo} alt={title} onClick={handleGoToPage} data-go-to-page="Home"/>
           </a>
-        </div>
+        </LogoContainer>
 
         <Title title={title} handleGoToPage={handleGoToPage}/>
 
