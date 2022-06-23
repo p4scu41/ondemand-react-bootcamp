@@ -1,8 +1,8 @@
 import { TitleContainer, TitleLink } from './Title.styles';
 
-const Title = ({title, handleGoToPage}) => (
+const Title = ({title}) => (
   <TitleContainer>
-    <TitleLink alt={title} onClick={handleGoToPage} data-go-to-page="Home">{title}</TitleLink>
+    <TitleLink alt={title} to='/home'>{title}</TitleLink>
   </TitleContainer>
 );
 

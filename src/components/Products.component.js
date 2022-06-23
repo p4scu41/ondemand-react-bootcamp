@@ -13,7 +13,7 @@ export default function Products({filter}) {
 
   return (
     <ProductsContainer>
-      { products.map(product => <Product product={product}  key={product.id} />) }
+      { products.map(product => <Product product={product} key={product.id} />) }
     </ProductsContainer>
   );
 }

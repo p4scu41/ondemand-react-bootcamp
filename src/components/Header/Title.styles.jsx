@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const TitleContainer = styled.div`
@@ -8,7 +9,7 @@ const TitleContainer = styled.div`
   font-weight: bolder;
 `;
 
-const TitleLink = styled.a`
+const TitleLink = styled(Link)`
   text-decoration: none;
   color: black;
   cursor: pointer;

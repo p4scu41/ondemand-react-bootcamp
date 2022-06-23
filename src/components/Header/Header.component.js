@@ -1,18 +1,19 @@
+import { Link } from 'react-router-dom';
 import logo from '../../img/logo.png';
 import { CartIcon, ImgRounded, LogoContainer, StyledHeader } from './Header.styles';
 import { SearchCartContainer, SearchIcon, SearchInput } from "./Search.styles";
 import Title from "./Title.component";
 
-export default function Header({title, handleGoToPage}) {
+export default function Header({title}) {
     return (
       <StyledHeader>
         <LogoContainer>
-          <a href='/' alt={title}>
-            <ImgRounded src={logo} alt={title} onClick={handleGoToPage} data-go-to-page="Home"/>
-          </a>
+          <Link to='/'>
+            <ImgRounded src={logo} alt={title}/>
+          </Link>
         </LogoContainer>
 
-        <Title title={title} handleGoToPage={handleGoToPage}/>
+        <Title title={title}/>
 
         <SearchCartContainer>
           <SearchCartContainer>
