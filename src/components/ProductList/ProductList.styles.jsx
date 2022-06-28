@@ -14,13 +14,9 @@ const Wrapper = styled.div`
   flex: auto;
 `;
 
-const ImgLoading = styled.img`
-  width: 60px;
-`;
-
 const FlexCenter = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-export { Container, ProductsContainer, Wrapper, ImgLoading, FlexCenter };
+export { Container, ProductsContainer, Wrapper, FlexCenter };

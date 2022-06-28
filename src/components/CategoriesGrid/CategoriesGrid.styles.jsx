@@ -1,12 +1,13 @@
+import { Link as RouterLink } from "react-router-dom";
 import styled from "styled-components";
 
 const CategoriesContainer = styled.div`
-  display: block;
+  display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 `;
 
-const Link = styled.a`
+const Link = styled(RouterLink)`
   text-decoration: none;
   color: black;
   display: flex;
@@ -17,7 +18,7 @@ const Link = styled.a`
   border-radius: 10px;
   cursor: pointer;
   min-width: 200px;
-  border: 1px solid ${props => props.selected ? 'black !important' : 'transparent'};
+  border: 1px solid transparent;
   &:hover {
     border: 1px solid lightgray;
   }
@@ -30,4 +31,9 @@ const Name = styled.span`
   text-align: center;
 `
 
-export { CategoriesContainer, Link, Name };
+const Img = styled.img`
+  width: 150px;
+  border-radius: 10px;
+`;
+
+export { CategoriesContainer, Link, Name, Img };

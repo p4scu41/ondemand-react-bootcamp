@@ -20,4 +20,8 @@ const PaginationItem = styled.li`
 }
 `;
 
-export { PaginationContainer, PaginationItem };
+const PaginationItemCurrent = styled(PaginationItem)`
+  border: 1px solid black;
+`;
+
+export { PaginationContainer, PaginationItem, PaginationItemCurrent };

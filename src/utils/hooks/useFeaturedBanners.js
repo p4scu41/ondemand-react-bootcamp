@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
-import { API_BASE_URL } from '../constants';
+import { useEffect, useState } from 'react';
+import urlTo from "../urlTo";
 import { useLatestAPI } from './useLatestAPI';
 
 export function useFeaturedBanners() {
-  const { ref: apiRef, isLoading: isApiMetadataLoading } = useLatestAPI();
+  const { ref: apiRef, isLoading: isApiLoading } = useLatestAPI();
   const [featuredBanners, setFeaturedBanners] = useState(() => ({
     data: {},
     isLoading: true,
   }));
 
   useEffect(() => {
-    if (!apiRef || isApiMetadataLoading) {
+    if (!apiRef || isApiLoading) {
       return () => {};
     }
 
@@ -20,14 +20,9 @@ export function useFeaturedBanners() {
       try {
         setFeaturedBanners({ data: {}, isLoading: true });
 
-        const response = await fetch(
-          `${API_BASE_URL}/documents/search?ref=${apiRef}&q=${encodeURIComponent(
-            '[[at(document.type, "banner")]]'
-          )}&lang=en-us&pageSize=5`,
-          {
-            signal: controller.signal,
-          }
-        );
+        const response = await fetch(urlTo.banners().replace('APIREF', apiRef), {
+          signal: controller.signal
+        });
         const data = await response.json();
 
         setFeaturedBanners({ data, isLoading: false });
@@ -42,7 +37,7 @@ export function useFeaturedBanners() {
     return () => {
       controller.abort();
     };
-  }, [apiRef, isApiMetadataLoading]);
+  }, [apiRef, isApiLoading]);
 
   return featuredBanners;
 }

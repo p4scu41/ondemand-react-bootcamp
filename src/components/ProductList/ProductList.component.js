@@ -1,42 +1,43 @@
-import { useEffect, useState } from "react";
-import loadingImg from '../../img/loading.gif';
-import items from "../../mocks/en-us/products.json";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import useFetch from "../../utils/hooks/useFetch";
+import urlTo from "../../utils/urlTo";
 import Categories from "../Categories/Categories.component";
 import Pagination from "../Pagination/Pagination.component";
 import Product from '../Product.component';
-import { Container, FlexCenter, ImgLoading, ProductsContainer, Wrapper } from './ProductList.styles';
+import Loading from "../Shared/Loading.component";
+import { Container, FlexCenter, ProductsContainer, Wrapper } from './ProductList.styles';
 
 function ProductList() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [categoriesSelected, setCategoriesSelected] = useState([]);
-  const products = items.results.filter((product) => {
-    return categoriesSelected.length === 0 || categoriesSelected.includes(product.data.category.id);
+  const [params] = useSearchParams();
+  const [categoriesSelected, setCategoriesSelected] = useState(() => params.has('category') ? [params.get('category')] : [] );
+  const [page, setPage] = useState(1);
+  const {isLoading, data} = useFetch(urlTo.products(page));
+  const products = !isLoading && data.results.filter((product) => {
+    return categoriesSelected.length === 0 || categoriesSelected.includes(product.data.category.slug);
   });
-
-  useEffect(() => {
-    // window.scrollTo({top: 0, behavior: 'smooth'});
-    const timerId = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timerId);
-  }, []);
 
   function handleSelectCategory(event, category_id) {
     event.stopPropagation();
 
     setCategoriesSelected((selected) => {
+      // Add if not exists
       if (!selected.includes(category_id)) {
         return [category_id, ...selected];
       }
 
+      // Remove if exists
       return selected.filter((value) => value !== category_id);
     });
   }
 
+  function clearFilters() {
+    setCategoriesSelected([]);
+  }
+
   return (
     <Container>
-      <Categories show_title={true} show_image={false} handleClick={handleSelectCategory} selectedIds={categoriesSelected}/>
+      <Categories handleClick={handleSelectCategory} selectedIds={categoriesSelected} clearFilters={clearFilters}/>
       <Wrapper>
         <ProductsContainer>
           {
@@ -44,9 +45,9 @@ function ProductList() {
           }
         </ProductsContainer>
         <FlexCenter>
-          { !isLoading && products.length > 0 && <Pagination /> }
+          { !isLoading && products.length > 0 && <Pagination setPage={setPage} currentPage={data.page} totalPages={data.total_pages} /> }
           { !isLoading && products.length === 0 && 'Products not found in the selected categories.' }
-          { isLoading && <ImgLoading alt="loading..." src={loadingImg} /> }
+          { isLoading && <Loading /> }
         </FlexCenter>
       </Wrapper>
     </Container>

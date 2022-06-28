@@ -1,3 +1,4 @@
+import Button from "../Button.component";
 import { CardContainer, CardFooter, CardImg, CardTitle } from "./Card.styles";
 
 const Card = ({image, title, category, price}) => (
@@ -7,6 +8,7 @@ const Card = ({image, title, category, price}) => (
         <CardFooter>
             <span>{category}</span>
             <span>{price}</span>
+            <Button size='small'>Add to Cart</Button>
         </CardFooter>
     </CardContainer>
 );

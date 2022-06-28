@@ -11,7 +11,6 @@ const LogoContainer = styled.div`
  padding: 1rem;
 `;
 
-
 const CartIcon = styled.img.attrs({
     src: icon,
     alt: 'Shopping Cart'

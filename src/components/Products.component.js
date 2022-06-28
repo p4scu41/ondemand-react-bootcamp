@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import items from "../mocks/en-us/products.json";
+import useFetch from "../utils/hooks/useFetch";
+import urlTo from "../utils/urlTo";
 import Product from './Product.component';
+import Loading from "./Shared/Loading.component";
 
 const ProductsContainer = styled.div`
   display: flex;
@@ -8,12 +10,16 @@ const ProductsContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export default function Products({filter}) {
-  const products = filter ? items.results.filter(filter) : items.results;
+export default function Products() {
+  const {isLoading, data: {results: products}} = useFetch(urlTo.featuredProducts());
 
   return (
     <ProductsContainer>
-      { products.map(product => <Product product={product} key={product.id} />) }
+      {
+        isLoading
+        ? <center><Loading /></center>
+        : products.map(product => <Product product={product} key={product.id} />)
+      }
     </ProductsContainer>
   );
 }

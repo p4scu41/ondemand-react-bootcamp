@@ -1,17 +1,30 @@
-import items from '../../mocks/en-us/featured-banners.json';
-import { SliderContainer, SliderItem, SliderTitle } from './Slider.styles';
+import { Navigation, Pagination } from "swiper";
+import 'swiper/css';
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { useFeaturedBanners } from '../../utils/hooks/useFeaturedBanners';
+import Loading from "../Shared/Loading.component";
 
 export default function Slider() {
-  const banners = items.results;
+  const { isLoading, data: {results: banners}} = useFeaturedBanners();
 
   return (
-    <SliderContainer>
-      {
-        banners.map(({id, data, href}) =>
-          <SliderItem key={id} image_url={data.main_image.url} >
-            <SliderTitle href={href} alt={data.main_image.alt}>{data.title}</SliderTitle>
-          </SliderItem>)
-      }
-    </SliderContainer>
-  );
+      isLoading
+      ? <center><Loading /></center>
+      : <Swiper
+        slidesPerView={1}
+        centeredSlides={true}
+        loop={true}
+        navigation={true}
+        pagination={true}
+        modules={[Navigation, Pagination]}
+      >
+        {banners && banners.map(
+          ({id, data, href}) => <SwiperSlide key={id}>
+            <img src={data.main_image.url} alt={data.main_image.alt} height={480}/>
+          </SwiperSlide>
+        )}
+      </Swiper>
+  )
 }
