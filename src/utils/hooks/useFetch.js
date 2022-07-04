@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from "react";
+import { useApiRef } from "../../store/ApiRefContext";
 import { objectIsEmpty } from "../helpers";
-import { useLatestAPI } from "./useLatestAPI";
 
 const useFetch = function (url) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
   const [error, setError] = useState(null);
   const cache = useRef({});
-  const { ref: apiRef, isLoading: isApiLoading } = useLatestAPI();
+  const { apiRef, isApiRefLoading } = useApiRef();
 
   useEffect(() => {
-    if (isApiLoading) {
+    if (isApiRefLoading) {
       return () => {};
     }
 
@@ -53,7 +53,7 @@ const useFetch = function (url) {
       mounted = false;
       abortController.abort();
     };
-  }, [url, isApiLoading, apiRef]);
+  }, [url, isApiRefLoading, apiRef]);
 
   return {isLoading, data, error};
 }

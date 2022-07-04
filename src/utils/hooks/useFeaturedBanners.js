@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useApiRef } from '../../store/ApiRefContext';
 import urlTo from "../urlTo";
-import { useLatestAPI } from './useLatestAPI';
 
 export function useFeaturedBanners() {
-  const { ref: apiRef, isLoading: isApiLoading } = useLatestAPI();
+  const { apiRef, isApiRefLoading } = useApiRef();
   const [featuredBanners, setFeaturedBanners] = useState(() => ({
     data: {},
     isLoading: true,
   }));
 
   useEffect(() => {
-    if (!apiRef || isApiLoading) {
+    if (!apiRef || isApiRefLoading) {
       return () => {};
     }
 
@@ -37,7 +37,7 @@ export function useFeaturedBanners() {
     return () => {
       controller.abort();
     };
-  }, [apiRef, isApiLoading]);
+  }, [apiRef, isApiRefLoading]);
 
   return featuredBanners;
 }

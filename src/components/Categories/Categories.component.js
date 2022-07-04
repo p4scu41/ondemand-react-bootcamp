@@ -14,7 +14,7 @@ export default function Categories({handleClick, selectedIds, clearFilters}) {
       {
         isLoading
         ? <center><Loading /></center>
-        : categories.map(({data, id, slugs}) =>
+        : categories && categories.map(({data, id, slugs}) =>
           <Link alt={data.alt} key={id} onClick={(e) => handleClick(e, slugs[0])} selected={ArrayHasIntersec(selectedIds, slugs)}>
             <Name>{data.name}</Name>
           </Link>)

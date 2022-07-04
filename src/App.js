@@ -5,6 +5,7 @@ import Home from './components/Home.component';
 import ProductDetail from './components/ProductDetail/ProductDetail.component';
 import ProductList from './components/ProductList/ProductList.component';
 import Search from './components/Search/Search.component';
+import { ApiRefProvider } from './store/ApiRefContext';
 
 function App() {
   return (
@@ -12,13 +13,15 @@ function App() {
       <Header title='Furniture Store' />
 
       <Content>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/home' element={<Home />} />
-          <Route path='/products' element={<ProductList />} />
-          <Route path='/products/:productId' element={<ProductDetail />} />
-          <Route path='/search' element={<Search />} />
-        </Routes>
+        <ApiRefProvider>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/products' element={<ProductList />} />
+            <Route path='/products/:productId' element={<ProductDetail />} />
+            <Route path='/search' element={<Search />} />
+          </Routes>
+        </ApiRefProvider>
       </Content>
 
       <Footer>
