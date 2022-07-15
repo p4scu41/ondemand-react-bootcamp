@@ -1,55 +1,27 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import './App.css';
-import Header from './components/Header/Header.js';
-import Home from './components/Home';
-import ProductList from './components/ProductList';
-import { useFeaturedBanners } from './utils/hooks/useFeaturedBanners';
-
-const Section = styled.section`
-  max-width: 960px;
-  margin: auto;
-`;
-
-const Content = styled.section`
-  padding: 10px;
-`;
-
-const Footer = styled.section`
-  text-align: center;
-  padding-bottom: 20px;
-  padding-top: 10px;
-  border-top: 1px solid lightgray;
-`;
+import { Route, Routes } from 'react-router-dom';
+import { Content, Footer, Section } from './App.styles';
+import Header from './components/Header/Header.component';
+import Home from './components/Home.component';
+import ProductDetail from './components/ProductDetail/ProductDetail.component';
+import ProductList from './components/ProductList/ProductList.component';
+import Search from './components/Search/Search.component';
+import { ApiRefProvider } from './store/ApiRefContext';
 
 function App() {
-  const { data, isLoading } = useFeaturedBanners();
-  const [currentPage, setCurrentPage] = useState('home');
-
-  console.log(data, isLoading);
-
-  function handleChangeCurrentPage(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    setCurrentPage(event.currentTarget.dataset.goToPage);
-  }
-
   return (
     <Section>
-      <Header title='Furniture Store' handleGoToPage={handleChangeCurrentPage}/>
+      <Header title='Furniture Store' />
 
       <Content>
-        {
-          (() => {
-            switch (currentPage) {
-              case 'ProductList':
-                return <ProductList />
-
-              default:
-                return <Home handleGoToPage={handleChangeCurrentPage}/>
-            }
-          })()
-        }
+        <ApiRefProvider>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/products' element={<ProductList />} />
+            <Route path='/products/:productId' element={<ProductDetail />} />
+            <Route path='/search' element={<Search />} />
+          </Routes>
+        </ApiRefProvider>
       </Content>
 
       <Footer>
