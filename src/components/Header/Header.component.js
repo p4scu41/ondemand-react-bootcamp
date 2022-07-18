@@ -2,7 +2,8 @@ import { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../img/logo.png';
 import Button from '../Shared/Button.component';
-import { CartIcon, ImgRounded, LogoContainer, StyledHeader } from './Header.styles';
+import ShoppingCartIcon from '../ShoppingCart/ShoppingCartIcon.component';
+import { ImgRounded, LogoContainer, StyledHeader } from './Header.styles';
 import { SearchCartContainer, SearchInput } from "./Search.styles";
 import Title from "./Title.component";
 
@@ -36,9 +37,7 @@ export default function Header({title}) {
             <Button type='submit' size='small' style={{marginRight: "15px"}} >Search</Button>
           </form>
         </SearchCartContainer>
-        <div>
-          <CartIcon />
-        </div>
+        <ShoppingCartIcon />
       </SearchCartContainer>
     </StyledHeader>
   )

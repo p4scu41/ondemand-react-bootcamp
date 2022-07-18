@@ -11,7 +11,7 @@ export default function CategoriesGrid() {
       {
         isLoading
         ? <center><Loading /></center>
-        : categories.map(({data, id, slugs}) =>
+        : categories && categories.map(({data, id, slugs}) =>
           <Link to={`/products?category=${slugs[0]}`} alt={data.alt} key={id}>
             <Img src={data.main_image.url} alt={data.main_image.alt} />
             <Name>{data.name}</Name>
